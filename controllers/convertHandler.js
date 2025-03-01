@@ -54,7 +54,7 @@ function ConvertHandler() {
     //console.log(listNumbers)
     //let notMoreThanOneDiv = true;
     if (listNumbers.length >= 3) listNumbers = false;
-    if (!listNumbers) return undefined;
+    if (!listNumbers) return "invalid number";
     // division
     let number1 = listNumbers[0];
     let number2 = listNumbers[1] || "1";
@@ -65,7 +65,7 @@ function ConvertHandler() {
       return parseFloat(number1) / parseFloat(number2);
     }
     catch (error){
-      return undefined;
+      return "invalid number";
     }
       
     /*let result = parseFloat(number1) / parseFloat(number2);
@@ -75,6 +75,7 @@ function ConvertHandler() {
   };
   
   this.getUnit = function(input) {
+    console.log(input)
     let unit = (input.match(/[a-zA-Z]+/g))[0].toLowerCase();
     
     switch (unit){
@@ -91,31 +92,31 @@ function ConvertHandler() {
       case "kg":
         return "kg";
       default:
-        return undefined;
+        return "invalid unit";
     }
   };
   
   this.getReturnUnit = function(initUnit) {
-    switch(initUnit){
+    switch(initUnit.toLowerCase()){
       case "km":
         return "mi";
       case "mi":
         return "km";
       case "gal":
         return "L";
-      case "L":
+      case "l":
         return "gal";
       case "kg":
         return 'lbs'
       case "lbs":
         return "kg";
       default:
-        return undefined;
+        return "unvalid unit";
     }
   };
 
   this.spellOutUnit = function(unit) {
-    switch(unit){
+    switch(unit.toLowerCase()){
       case "km":
         return "kilometers";
       case "mi":
@@ -126,18 +127,19 @@ function ConvertHandler() {
         return "pounds";
       case "kg": 
         return "kilograms";
-      case "L":
+      case "l":
         return "liters";
       default:
         return "don't know";
     }
   };
   
-  this.convert = function(initNum, initUnit) {
+  this.convert = function({initNum, initUnit}) {
     const galToL = 3.78541;
     const lbsToKg = 0.453592;
     const miToKm = 1.60934;
     let result;
+    //console.log("------",initNum, initUnit)
     switch(initUnit){
       case "km":
         result =  initNum / miToKm;

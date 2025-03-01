@@ -16,12 +16,20 @@ module.exports = function (app) {
     //console.log("test", inputNumber, inputUnit)
     //res.json("test", inputNumber)
     //console.log(inputNumber)
-    if (!inputNumber){
-      if(!inputUnit) res.send("invalid number and unit");
-      res.send("invalid number")
+    if (inputNumber === "invalid number"){
+      //res.setHeader('Content-Type', 'text/plain');
+      if(inputUnit === "invalid unit") res.json("invalid number and unit");
+      res.json("invalid number")
     }
-    if(!inputUnit) res.send("invalid unit")
-    let returnNumber = convertHandler.convert(inputNumber, inputUnit);
+    if(inputUnit === "invalid unit") {
+      //res.setHeader('Content-Type', 'text/plain');
+      res.json("invalid unit")
+      //console.log("****test*******" , res.text)
+    }
+    //console.log({inputNumber, inputUnit})
+    let initNum = inputNumber;
+    let initUnit = inputUnit;
+    let returnNumber = convertHandler.convert({initNum, initUnit});
     let returnUnit = convertHandler.getReturnUnit(inputUnit);
     let theMessage = convertHandler.getString(inputNumber, inputUnit, returnNumber, returnUnit);
     res.json({initNum: inputNumber, initUnit:inputUnit, returnNum: returnNumber, returnUnit:returnUnit, string: theMessage}) 
@@ -38,4 +46,6 @@ module.exports = function (app) {
   /*app.route("/api/convert").get((req, res)=>{
     console.log(req.query.input)
   })*/
+  //console.log("--------1", res.body)
+
 };

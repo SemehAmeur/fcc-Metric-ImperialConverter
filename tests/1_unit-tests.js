@@ -86,7 +86,7 @@ suite("Unit Tests", function() {
     const initUnit = "gal";
     const galToL = 3.78541;
     const result = convertHandler.convert({ initNum, initUnit });
-    assert.equal(result, Math.round(initNum * galToL * 100000) / 100000);
+    assert.equal(result, Math.round(initNum * galToL * 100000) / 100000);    
     done();
   });
   test("#12 -- convertHandler should correctly convert L to gal.", done => {

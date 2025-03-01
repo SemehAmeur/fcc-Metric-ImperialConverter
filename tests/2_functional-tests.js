@@ -23,7 +23,9 @@ suite("Functional Tests", function() {
       .get("/api/convert?input=32g")
       .end((err, res) => {
         assert.equal(res.status, 200);
+        //console.log("***********" , res.body)
         assert.equal(res.body, "invalid unit");
+        
         done();
       });
   });
